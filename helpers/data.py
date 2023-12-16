@@ -52,3 +52,5 @@ class Database:
             print(f"Table '{table_name}' successfully deleted.")
         else:
             print("Error: No connection detected.")
+
+
