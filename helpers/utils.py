@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+from sklearn.cluster import KMeans
 
 
 class Helpers:
@@ -27,4 +28,12 @@ class Helpers:
         final_df = pd.concat([df, pca_df], axis=1)
         return final_df
 
+    @staticmethod
+    def perform_kmeans(self, agg_data: pd.DataFrame, columns: list, n_clusters: int):
+        cluster_data = agg_data[columns]
 
+        # Perform k-means clustering with specified number of clusters
+        kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+        agg_data['Cluster'] = kmeans.fit_predict(cluster_data)
+
+        return agg_data[['MSISDN/Number', 'Cluster']]
